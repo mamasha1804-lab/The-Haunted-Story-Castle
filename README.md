@@ -1,16 +1,11 @@
 # The Haunted Story Castle
 
-A colorful child-friendly Halloween English game.
+Interactive Halloween story game for little learners.
 
-## Live site
-https://mamasha1804-lab.github.io/The-Haunted-Story-Castle/
+Live site: https://mamasha1804-lab.github.io/The-Haunted-Story-Castle/
 
-## Included
-- Story Builder: Who? / Where? / What happened? / Surprise!
-- Illustrated spooky-cute characters and locations
-- English read-aloud with browser Speech Synthesis
-- Pumpkin Patch Adventure with 3 stages: find, listen, count
-- Local story/candy progress
-- Responsive desktop, tablet and mobile layout
-
-Static HTML/CSS/JavaScript. No build step required.
+Features:
+- Illustrated story builder
+- Spoken English and optional magical background sound
+- Persistent story choices and story counter
+- Pumpkin Patch Adventure with three interactive stages, scoring, timer and collectible reward
