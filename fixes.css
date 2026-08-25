@@ -1,0 +1,102 @@
+/* Visual corrections layered over the illustrated mockup. */
+
+/* The mockup already contains example text. These solid overlays hide the baked-in demo values
+   so live text never doubles up with the artwork underneath. */
+.dynamic-story{
+  left:28.35%;
+  top:61.15%;
+  width:23.15%;
+  height:7.15%;
+  padding:.45% .9%;
+  overflow:hidden;
+  border:1px solid rgba(125,78,25,.42);
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(249,224,174,.985),rgba(230,191,116,.985));
+  box-shadow:inset 0 0 16px rgba(126,70,18,.16),0 1px 0 rgba(255,255,255,.3);
+  color:#241609;
+  font-size:clamp(9px,1.02vw,15px);
+  line-height:1.18;
+  text-shadow:0 1px rgba(255,255,255,.42);
+}
+.dynamic-story #storyText{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+}
+.dynamic-story.story-change{animation:storyPop .34s ease}
+@keyframes storyPop{0%{transform:scale(.97);filter:brightness(1.08)}55%{transform:scale(1.018)}100%{transform:none}}
+
+.dynamic-count{
+  left:66.65%;
+  top:68.85%;
+  width:2.85%;
+  height:3.55%;
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(246,217,160,.99),rgba(225,182,105,.99));
+  box-shadow:inset 0 0 10px rgba(119,67,16,.16);
+  font-size:clamp(11px,1.35vw,21px);
+}
+
+/* Replace the floating mini-pills with neat labels that sit inside the four cards. */
+.selection-label{
+  max-width:none;
+  width:10.2%;
+  top:51.55%;
+  transform:translate(-50%,-50%);
+  padding:3px 5px;
+  border-radius:8px;
+  border:1px solid rgba(255,207,88,.88);
+  background:linear-gradient(180deg,rgba(62,13,90,.97),rgba(32,7,55,.97));
+  color:#fff0b3;
+  font-size:clamp(7px,.69vw,11px);
+  line-height:1.05;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  box-shadow:0 2px 8px rgba(0,0,0,.42),inset 0 0 8px rgba(255,196,73,.09);
+}
+.label-character{left:22.95%}.label-setting{left:35.20%}.label-problem{left:47.35%}.label-surprise{left:58.88%}
+
+/* Dynamic art now fills the actual picture window more cleanly and no longer looks like a small sticker. */
+.card-art{
+  border:0;
+  border-radius:9px;
+  background-color:#291157;
+  box-shadow:inset 0 0 0 2px rgba(255,211,100,.34),0 3px 11px rgba(0,0,0,.3);
+}
+.card-art#artCharacter{left:18.10%;top:38.85%;width:9.45%;height:12.35%}
+.card-art#artSetting{left:30.15%;top:38.85%;width:9.45%;height:12.35%}
+.card-art#artProblem{left:42.22%;top:38.85%;width:9.45%;height:12.35%}
+.card-art#artSurprise{left:53.92%;top:38.85%;width:9.45%;height:12.35%}
+
+/* Right-side selection outlines are now confined to the actual cards. */
+.side-choice{gap:1.05%}
+.side-choice button{height:94%;align-self:start;border-radius:8px}
+.side-choice button.active{outline-width:2px;box-shadow:0 0 12px rgba(255,179,39,.32)}
+.side-choice button::after{right:4px;top:4px;width:8px;height:8px}
+
+/* Prevent multiple rapid full-story rolls from stacking animations and counters. */
+.mockup-canvas.is-rolling .roll-story,
+.mockup-canvas.is-rolling .roll-again{pointer-events:none;filter:brightness(.92)}
+
+/* Pumpkin Patch has baked-in demo numbers too; cover them with live counters. */
+.patch-count,.patch-score,.patch-time{
+  background:rgba(31,7,61,.94);
+  border:1px solid rgba(226,171,62,.76);
+  border-radius:9px;
+  box-shadow:0 2px 8px rgba(0,0,0,.34);
+}
+
+@media(max-width:900px){
+  .dynamic-story{font-size:clamp(7px,1.45vw,12px);border-radius:9px}
+  .selection-label{font-size:clamp(6px,1.12vw,9px);padding:2px 3px}
+  .dynamic-count{font-size:clamp(9px,1.8vw,15px)}
+}
+
+@media(max-width:620px){
+  .mockup-body{overflow-x:hidden}
+  .mockup-canvas{width:100vw;box-shadow:none}
+  .selection-label{display:block}
+  .hotspot:focus-visible{outline-width:2px}
+}
