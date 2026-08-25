@@ -1,5 +1,50 @@
-const D={character:[['Little Witch','a little witch',0],['Friendly Ghost','a friendly ghost',1],['Talking Pumpkin','a talking pumpkin',2],['Sleepy Black Cat','a sleepy black cat',3],['Tiny Vampire','a tiny vampire',4],['Baby Bat','a baby bat',5]],setting:[['Haunted Castle','the haunted castle',0],['Pumpkin Patch','the pumpkin patch',1],['Spooky Forest','the spooky forest',2],['Magic School','the magic school at night',3],['Moonlit Cave','a moonlit cave',4],['Magic Lab','a magical Halloween lab',5]],problem:[['A magic book glows','found a magic book that suddenly began to glow',0],['Someone gets lost','met a friend who had lost the path home',1],['A new friend appears','met a mysterious new friend',2],['A strange sound','heard a funny spooky sound that would not stop',3],['A mystery to solve','discovered a tiny Halloween mystery to solve',4],['A secret door','found a glowing secret door in the wall',5]],surprise:[['A pumpkin talks','Then a pumpkin opened its eyes and started talking!',0],['Candy rain','Then colorful candy began to rain from the sky!',1],['A magic spell','Then a sparkling spell made everyone giggle!',2],['Hidden treasure','Then a tiny treasure chest popped open!',3],['A dancing broom','Then a little broom jumped up and started dancing!',4],['A ghost appears','Then a giggling ghost floated out from behind a curtain!',5]]};
-const cls={character:'char',setting:'loc',problem:'prob',surprise:'sur'},st={character:D.character[0],setting:D.setting[0],problem:D.problem[0],surprise:D.surprise[0],sound:true,count:+localStorage.hauntedStoryCount||0},$=s=>document.querySelector(s);$('#storyCount').textContent=st.count;
-function art(slot,item){let n=$(`#${slot}Art`);n.className=`spr ${cls[slot]} p${item[2]}`;let t=$(`#${slot}Text`);if(t)t.textContent=item[0]}function pick(slot){st[slot]=D[slot][Math.floor(Math.random()*D[slot].length)];art(slot,st[slot]);say(st[slot][0])}function story(){return `On a sparkling Halloween night, ${st.character[1]} went to ${st.setting[1]} and ${st.problem[1]}. ${st.surprise[1]}`}function roll(){['character','setting','problem','surprise'].forEach((s,i)=>setTimeout(()=>pick(s),i*80));setTimeout(()=>{st.count++;localStorage.hauntedStoryCount=st.count;$('#storyCount').textContent=st.count;$('#story').textContent=story();$('#resultArt').className=`spr char p${st.character[2]}`;$('#result').classList.add('show')},390)}function say(t){if(!st.sound||!('speechSynthesis' in window))return;let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.84;u.pitch=1.08;window.speechSynthesis.cancel();window.speechSynthesis.speak(u)}function toast(t){let n=$('#toast');n.textContent=t;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2200)}
-document.querySelectorAll('.storyCard').forEach(b=>b.onclick=()=>pick(b.dataset.slot));$('#roll').onclick=roll;$('#again').onclick=roll;$('#read').onclick=()=>say($('#story').textContent);$('#sound').onclick=e=>{st.sound=!st.sound;e.currentTarget.textContent=st.sound?'Sound':'Muted';if(!st.sound&&'speechSynthesis' in window)window.speechSynthesis.cancel()};document.querySelectorAll('.soon').forEach(b=>b.onclick=()=>toast('This magical room is coming soon!'));
-D.character.forEach(c=>{let b=document.createElement('button');b.className='friendChip';b.innerHTML=`<i class="spr char p${c[2]}"></i><strong>${c[0]}</strong><small>Tap to hear</small>`;b.onclick=()=>say(c[0]);$('#friendRow').append(b)});
+const choices={
+  character:[
+    {name:'Witch',phrase:'a little witch'},
+    {name:'Ghost',phrase:'a friendly ghost'},
+    {name:'Black Cat',phrase:'a curious black cat'},
+    {name:'Pumpkin',phrase:'a talking pumpkin'},
+    {name:'Vampire',phrase:'a tiny vampire'}
+  ],
+  setting:[
+    {name:'Haunted Castle',phrase:'the haunted castle'},
+    {name:'Spooky Forest',phrase:'the spooky forest'},
+    {name:'Pumpkin Patch',phrase:'the pumpkin patch'},
+    {name:'Old School',phrase:'the old school at night'},
+    {name:'Magic Lab',phrase:'the magical Halloween lab'}
+  ],
+  problem:[
+    {name:'Finds a magic book',phrase:'found a magic book'},
+    {name:'Meets a new friend',phrase:'met a new friend'},
+    {name:'Hears a strange sound',phrase:'heard a strange sound'},
+    {name:'Solves a mystery',phrase:'solved a tiny mystery'},
+    {name:'Finds a secret door',phrase:'found a secret door'}
+  ],
+  surprise:[
+    {name:'Rainy Candies',phrase:'then colorful candies rained from the sky'},
+    {name:'A magic spell',phrase:'then a sparkling spell made everyone giggle'},
+    {name:'A hidden treasure',phrase:'then a hidden treasure chest popped open'},
+    {name:'A flying broom',phrase:'then a broom started flying'},
+    {name:'A ghost appears',phrase:'then a friendly ghost appeared'}
+  ]
+};
+const state={character:choices.character[0],setting:choices.setting[0],problem:choices.problem[0],surprise:choices.surprise[2],sound:true,count:Number(localStorage.getItem('hauntedStoryCount')||0)};
+const labels={character:document.getElementById('labelCharacter'),setting:document.getElementById('labelSetting'),problem:document.getElementById('labelProblem'),surprise:document.getElementById('labelSurprise')};
+const storyText=document.getElementById('storyText');
+const storyCount=document.getElementById('storyCount');
+const toast=document.getElementById('toast');
+storyCount.textContent=state.count;
+function story(){return `${cap(state.character.phrase)} went to ${state.setting.phrase}, ${state.problem.phrase}, and ${state.surprise.phrase}!`;}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function say(text){if(!state.sound||!('speechSynthesis'in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.84;u.pitch=1.05;speechSynthesis.speak(u)}
+function flash(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(flash.t);flash.t=setTimeout(()=>toast.classList.remove('show'),1500)}
+function setChoice(slot,index,announce=true){state[slot]=choices[slot][index];labels[slot].textContent=state[slot].name;document.querySelectorAll(`[data-slot="${slot}"]`).forEach((b,i)=>b.classList.toggle('active',i===index));if(announce)say(state[slot].name);}
+function roll(slot,announce=true){const i=Math.floor(Math.random()*choices[slot].length);setChoice(slot,i,announce);flash(`${slot==='setting'?'Where':slot==='problem'?'What happened':slot==='surprise'?'Surprise':'Who'}: ${state[slot].name}`)}
+function rollAll(){['character','setting','problem','surprise'].forEach((slot,i)=>setTimeout(()=>roll(slot,false),i*110));setTimeout(()=>{state.count+=1;localStorage.setItem('hauntedStoryCount',String(state.count));storyCount.textContent=state.count;storyText.textContent=story();say(story());flash('A new magical story is ready!')},520)}
+function render(group,id){const holder=document.getElementById(id);choices[group].forEach((item,index)=>{const b=document.createElement('button');b.type='button';b.dataset.slot=group;b.setAttribute('aria-label',item.name);b.title=item.name;b.addEventListener('click',()=>setChoice(group,index));holder.appendChild(b)})}
+render('character','characterChoices');render('setting','settingChoices');render('problem','problemChoices');render('surprise','surpriseChoices');
+setChoice('character',0,false);setChoice('setting',0,false);setChoice('problem',0,false);setChoice('surprise',2,false);storyText.textContent=story();
+document.querySelectorAll('[data-roll]').forEach(b=>b.addEventListener('click',()=>roll(b.dataset.roll)));
+document.getElementById('rollStory').addEventListener('click',rollAll);
+document.getElementById('rollAgain').addEventListener('click',rollAll);
+document.getElementById('readAloud').addEventListener('click',()=>say(storyText.textContent));

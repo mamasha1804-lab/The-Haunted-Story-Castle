@@ -1,15 +1,52 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090827"><meta name="description" content="The Haunted Story Castle — a colorful Halloween story game for little English learners."><title>The Haunted Story Castle</title><link rel="stylesheet" href="style.css"></head><body>
-<header class="top"><a class="brand" href="#home"><i class="spr loc p0"></i><span><small>The Haunted</small><b>Story Castle</b></span></a><nav><a href="#home">Home</a><a href="#builder">Story Builder</a><a href="#rooms">Rooms</a><a href="#friends">Friends</a></nav><div class="tools"><span class="score">★ <b id="storyCount">0</b></span><button id="sound">Sound</button></div></header>
-<main id="home"><section class="hero" id="builder"><div class="heroInner"><p class="kicker">A magical Halloween story game for little explorers</p><h1><em>Create your own</em> magical Halloween story!</h1><p class="lead">Roll four magical cards and watch a spooky-cute story appear.</p><div class="cards">
-<button class="storyCard orange" data-slot="character"><b>Who?</b><i id="characterArt" class="spr char p0"></i><strong id="characterText">Little Witch</strong><small>Tap to roll</small></button>
-<button class="storyCard blue" data-slot="setting"><b>Where?</b><i id="settingArt" class="spr loc p0"></i><strong id="settingText">Haunted Castle</strong><small>Tap to roll</small></button>
-<button class="storyCard purple" data-slot="problem"><b>What happened?</b><i id="problemArt" class="spr prob p0"></i><strong id="problemText">A magic book glows</strong><small>Tap to roll</small></button>
-<button class="storyCard green" data-slot="surprise"><b>Surprise!</b><i id="surpriseArt" class="spr sur p0"></i><strong id="surpriseText">A pumpkin talks</strong><small>Tap to roll</small></button></div>
-<button class="big" id="roll">◇ Roll the Story!</button><div class="result" id="result"><i id="resultArt" class="spr char p0"></i><div><small>YOUR MAGICAL STORY</small><p id="story">Ready for a Halloween adventure?</p></div><div class="resultBtns"><button id="read">Read aloud</button><button id="again">Roll again</button></div></div></div></section>
-<section class="section" id="rooms"><div class="title"><small>EXPLORE THE CASTLE</small><h2>More Magical Rooms</h2></div><div class="rooms">
-<article><a href="pumpkin-patch.html" class="roomPic"><i class="room r0"></i><span class="ready">PLAY NOW</span></a><h3>Pumpkin Patch Adventure</h3><p>Find pumpkins, listen to English clues and collect candy.</p><a class="go" href="pumpkin-patch.html">Play room →</a></article>
-<article><div class="roomPic"><i class="room r1"></i><span>COMING SOON</span></div><h3>Magic Cauldron</h3><p>Mix a character, place and magical object to brew a story.</p><button class="soon">Preview room →</button></article>
-<article><div class="roomPic"><i class="room r2"></i><span>COMING SOON</span></div><h3>Mystery House</h3><p>Open magical doors and solve tiny Halloween mysteries.</p><button class="soon">Preview room →</button></article>
-<article><div class="roomPic"><i class="room r3"></i><span>COMING SOON</span></div><h3>Moonlight Theatre</h3><p>Spin a story and choose what happens next on stage.</p><button class="soon">Preview room →</button></article></div></section>
-<section class="section friends" id="friends"><div class="title"><small>MEET THE CAST</small><h2>Spooky-Cute Friends</h2></div><div id="friendRow" class="friendRow"></div></section>
-<section class="benefits"><div><b>SAFE</b><span>Child-Friendly</span><small>Sweet Halloween fun, not scary.</small></div><div><b>IDEA</b><span>Builds Creativity</span><small>Storytelling and imagination.</small></div><div><b>PLAY</b><span>Little Hands</span><small>Big buttons and simple choices.</small></div><div><b>ABC</b><span>Listen & Repeat</span><small>English read-aloud.</small></div></section></main><footer>© The Haunted Story Castle · Halloween story game</footer><div id="toast" class="toast"></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12062d">
+  <meta name="description" content="The Haunted Story Castle — a magical Halloween story game for little learners.">
+  <title>The Haunted Story Castle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mockup-body">
+  <main class="mockup-wrap" aria-label="The Haunted Story Castle interactive game">
+    <div class="mockup-canvas" id="castleCanvas">
+      <img class="mockup-bg" src="assets/ChatGPT Image Aug 26, 2026, 01_21_56 AM.png" alt="The Haunted Story Castle game interface">
+
+      <a class="hotspot nav-home" href="index.html" aria-label="Home"></a>
+      <a class="hotspot nav-patch" href="pumpkin-patch.html" aria-label="Pumpkin Patch"></a>
+
+      <button class="hotspot main-card who-card" data-roll="character" aria-label="Roll character"></button>
+      <button class="hotspot main-card where-card" data-roll="setting" aria-label="Roll place"></button>
+      <button class="hotspot main-card problem-card" data-roll="problem" aria-label="Roll event"></button>
+      <button class="hotspot main-card surprise-card" data-roll="surprise" aria-label="Roll surprise"></button>
+      <button class="hotspot roll-story" id="rollStory" aria-label="Roll the Story"></button>
+      <button class="hotspot roll-again" id="rollAgain" aria-label="Roll again"></button>
+      <button class="hotspot read-aloud" id="readAloud" aria-label="Read story aloud"></button>
+      <a class="hotspot patch-card-link" href="pumpkin-patch.html" aria-label="Play Pumpkin Patch Adventure"></a>
+
+      <div class="dynamic-story" id="dynamicStory" aria-live="polite">
+        <span id="storyText">A little witch went to the haunted castle, found a magic book, and suddenly a pumpkin started talking!</span>
+      </div>
+      <div class="dynamic-count"><strong id="storyCount">0</strong></div>
+
+      <div class="selection-label label-character" id="labelCharacter">Witch</div>
+      <div class="selection-label label-setting" id="labelSetting">Haunted Castle</div>
+      <div class="selection-label label-problem" id="labelProblem">Finds a magic book</div>
+      <div class="selection-label label-surprise" id="labelSurprise">A hidden treasure</div>
+
+      <div class="side-choice character-choices" id="characterChoices"></div>
+      <div class="side-choice setting-choices" id="settingChoices"></div>
+      <div class="side-choice problem-choices" id="problemChoices"></div>
+      <div class="side-choice surprise-choices" id="surpriseChoices"></div>
+
+      <button class="hotspot side-roll side-roll-character" data-roll="character" aria-label="Roll character"></button>
+      <button class="hotspot side-roll side-roll-setting" data-roll="setting" aria-label="Roll place"></button>
+      <button class="hotspot side-roll side-roll-problem" data-roll="problem" aria-label="Roll event"></button>
+      <button class="hotspot side-roll side-roll-surprise" data-roll="surprise" aria-label="Roll surprise"></button>
+    </div>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

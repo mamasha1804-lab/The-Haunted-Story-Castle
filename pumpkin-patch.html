@@ -1,9 +1,64 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#130a38"><title>Pumpkin Patch Adventure · The Haunted Story Castle</title><link rel="stylesheet" href="style.css"></head><body class="patchPage">
-<header class="top"><a class="brand" href="index.html"><i class="spr loc p0"></i><span><small>The Haunted</small><b>Story Castle</b></span></a><nav><a href="index.html">Castle</a><a href="pumpkin-patch.html">Pumpkin Patch</a><a href="index.html#rooms">More Rooms</a></nav><div class="tools"><span class="score">◆ <b id="candyTotal">0</b></span><button id="sound">Sound</button></div></header>
-<main><section class="patchHero"><i class="heroFriend spr char p0"></i><i class="heroFriend catHero spr char p3"></i><div><p class="kicker">A new magical room is open</p><h1>Pumpkin Patch <em>Adventure</em></h1><p class="lead">Help the little witch find missing pumpkins, listen to English clues and collect a candy reward.</p><button class="big" id="start">Start Adventure</button></div></section>
-<section class="game" id="game"><div class="gameTop"><div><small>TONIGHT'S MISSION</small><b id="mission">Find 5 glowing pumpkins</b></div><div class="steps"><b class="on" data-step="1">1</b><i></i><b data-step="2">2</b><i></i><b data-step="3">3</b></div><button id="restart">Restart</button></div>
-<section class="stage" data-stage="1"><header><b>1</b><div><small>EXPLORE</small><h2>Find the missing pumpkins!</h2><p>Tap every glowing pumpkin. Each one says its English name.</p></div><strong><span id="pumpkinCount">0</span>/5</strong></header><div class="findScene"><i class="sceneFriend spr char p0"></i><i class="sceneFriend catScene spr char p3"></i><button class="pumpkin p1"><i class="spr char p2"></i></button><button class="pumpkin p2"><i class="spr char p2"></i></button><button class="pumpkin p3"><i class="spr char p2"></i></button><button class="pumpkin p4"><i class="spr char p2"></i></button><button class="pumpkin p5"><i class="spr char p2"></i></button><div id="wordPop">pumpkin</div></div></section>
-<section class="stage" data-stage="2" hidden><header><b>2</b><div><small>LISTEN & CHOOSE</small><h2>Who is hiding?</h2><p>Listen, then tap the correct Halloween friend.</p></div><strong><span id="friendScore">0</span>/3</strong></header><div class="clue"><i class="spr char p1"></i><div><small>ENGLISH CLUE</small><h3 id="clueText">Find the friendly ghost.</h3><button id="hearClue">Hear the clue</button></div></div><div class="choices"><button data-friend="ghost"><i class="spr char p1"></i><b>Ghost</b></button><button data-friend="cat"><i class="spr char p3"></i><b>Black Cat</b></button><button data-friend="witch"><i class="spr char p0"></i><b>Witch</b></button></div><p class="feedback" id="friendFeedback"></p></section>
-<section class="stage" data-stage="3" hidden><header><b>3</b><div><small>COUNT & COLLECT</small><h2>Fill the candy basket!</h2><p id="candyInstruction">Put 3 candies in the basket.</p></div><strong><span id="selectedCandy">0</span> selected</strong></header><div class="candyGame"><div class="request"><i class="spr char p2"></i><div><small>PUMPKIN PIP SAYS</small><b id="requestText">Three candies, please!</b></div><button id="hearCandy">Hear it</button></div><div class="tray" id="tray"><button><i class="spr sur p1"></i></button><button><i class="spr sur p1"></i></button><button><i class="spr sur p1"></i></button><button><i class="spr sur p1"></i></button><button><i class="spr sur p1"></i></button></div><button class="big" id="check">Check Basket</button><p class="feedback" id="candyFeedback"></p></div></section></section>
-<section class="section"><div class="title"><small>LITTLE ENGLISH</small><h2>Words we meet in the patch</h2></div><div class="wordRow"><button data-say="pumpkin"><i class="spr char p2"></i><b>Pumpkin</b></button><button data-say="ghost"><i class="spr char p1"></i><b>Ghost</b></button><button data-say="black cat"><i class="spr char p3"></i><b>Black Cat</b></button><button data-say="witch"><i class="spr char p0"></i><b>Witch</b></button></div></section></main>
-<div class="modal" id="modal"><div class="reward"><div class="rewardCast"><i class="spr char p0"></i><i class="spr char p2"></i><i class="spr char p3"></i><i class="spr char p1"></i></div><small>ADVENTURE COMPLETE</small><h2>You found them all!</h2><p>Great job! You earned <b>10 candy stars</b>.</p><div><button class="big" id="playAgain">Play Again</button><a class="go" href="index.html">Back to Castle</a></div></div></div><div id="toast" class="toast"></div><script src="pumpkin.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12062d">
+  <meta name="description" content="Pumpkin Patch Adventure — a magical Halloween mini-game for little learners.">
+  <title>Pumpkin Patch Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mockup-body">
+  <main class="mockup-wrap" aria-label="Pumpkin Patch Adventure">
+    <div class="mockup-canvas" id="patchCanvas">
+      <img class="mockup-bg" src="assets/ChatGPT Image Aug 26, 2026, 01_22_04 AM.png" alt="Pumpkin Patch Adventure game interface">
+
+      <a class="hotspot nav-home" href="index.html" aria-label="Back to Castle"></a>
+      <button class="hotspot patch-start" id="startAdventure" aria-label="Start Adventure"></button>
+      <button class="hotspot play-again-hot" id="playAgain" aria-label="Play again"></button>
+      <a class="hotspot back-castle-hot" href="index.html" aria-label="Back to Castle"></a>
+      <button class="hotspot collect-hot" id="collectReward" aria-label="Collect reward"></button>
+
+      <button class="pumpkin-target pt1" aria-label="Hidden pumpkin 1"></button>
+      <button class="pumpkin-target pt2" aria-label="Hidden pumpkin 2"></button>
+      <button class="pumpkin-target pt3" aria-label="Hidden pumpkin 3"></button>
+      <button class="pumpkin-target pt4" aria-label="Hidden pumpkin 4"></button>
+      <button class="pumpkin-target pt5" aria-label="Hidden pumpkin 5"></button>
+
+      <div class="patch-count" id="patchCount">0/5</div>
+      <div class="patch-score" id="patchScore">0</div>
+
+      <div class="patch-message" id="startMessage">
+        <h2>Find 5 missing pumpkins!</h2>
+        <p>Tap the glowing hiding places. Each pumpkin will say its English name.</p>
+        <button id="closeStart">Let’s play!</button>
+      </div>
+
+      <div class="patch-clue" id="friendClue">
+        <h3 id="friendClueText">Find the friendly ghost.</h3>
+        <div class="clue-options">
+          <button data-friend="ghost">Ghost</button>
+          <button data-friend="cat">Black Cat</button>
+          <button data-friend="witch">Witch</button>
+        </div>
+      </div>
+
+      <div class="patch-message" id="candyGame">
+        <h2 id="candyTitle">Put 3 candies in the basket!</h2>
+        <div class="candy-choice-row" id="candyRow">
+          <button>1</button><button>2</button><button>3</button><button>4</button><button>5</button>
+        </div>
+        <button id="checkCandy">Check Basket</button>
+      </div>
+
+      <div class="patch-message" id="winMessage">
+        <h2>You found them all!</h2>
+        <p>Great job! You earned <strong>10 candy stars</strong>.</p>
+        <button id="closeWin">Play Again</button>
+      </div>
+    </div>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="pumpkin.js"></script>
+</body>
+</html>
