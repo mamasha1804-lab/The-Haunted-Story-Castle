@@ -10,23 +10,40 @@
 </head>
 <body class="mockup-body">
   <main class="mockup-wrap" aria-label="The Haunted Story Castle interactive game">
-    <div class="mockup-canvas" id="castleCanvas">
+    <div class="mockup-canvas" id="castleCanvas" tabindex="-1">
       <img class="mockup-bg" src="assets/ChatGPT Image Aug 26, 2026, 01_21_56 AM.png" alt="The Haunted Story Castle game interface">
 
       <a class="hotspot nav-home" href="index.html" aria-label="Home"></a>
+      <button class="hotspot nav-story" type="button" data-jump="story" aria-label="Story Castle"></button>
       <a class="hotspot nav-patch" href="pumpkin-patch.html" aria-label="Pumpkin Patch"></a>
+      <button class="hotspot nav-cauldron future-link" type="button" data-room="Magic Cauldron" aria-label="Magic Cauldron"></button>
+      <button class="hotspot nav-mystery future-link" type="button" data-room="Mystery House" aria-label="Mystery House"></button>
+      <button class="hotspot nav-theatre future-link" type="button" data-room="Moonlight Theatre" aria-label="Moonlight Theatre"></button>
+
+      <button class="hotspot icon-hot music-hot" id="musicToggle" type="button" aria-pressed="false" aria-label="Toggle magical background music"></button>
+      <button class="hotspot icon-hot sound-hot" id="soundToggle" type="button" aria-pressed="true" aria-label="Toggle spoken sound"></button>
+      <button class="hotspot icon-hot settings-hot" id="settingsToggle" type="button" aria-expanded="false" aria-controls="settingsPanel" aria-label="Open settings"></button>
 
       <button class="hotspot main-card who-card" data-roll="character" aria-label="Roll character"></button>
       <button class="hotspot main-card where-card" data-roll="setting" aria-label="Roll place"></button>
       <button class="hotspot main-card problem-card" data-roll="problem" aria-label="Roll event"></button>
       <button class="hotspot main-card surprise-card" data-roll="surprise" aria-label="Roll surprise"></button>
+
+      <i class="card-art spr char p0 is-base" id="artCharacter" aria-hidden="true"></i>
+      <i class="card-art spr loc p0 is-base" id="artSetting" aria-hidden="true"></i>
+      <i class="card-art spr prob p0 is-base" id="artProblem" aria-hidden="true"></i>
+      <i class="card-art spr sur p2 is-base" id="artSurprise" aria-hidden="true"></i>
+
       <button class="hotspot roll-story" id="rollStory" aria-label="Roll the Story"></button>
       <button class="hotspot roll-again" id="rollAgain" aria-label="Roll again"></button>
       <button class="hotspot read-aloud" id="readAloud" aria-label="Read story aloud"></button>
       <a class="hotspot patch-card-link" href="pumpkin-patch.html" aria-label="Play Pumpkin Patch Adventure"></a>
+      <button class="hotspot room-cauldron future-link" type="button" data-room="Magic Cauldron" aria-label="Magic Cauldron coming soon"></button>
+      <button class="hotspot room-mystery future-link" type="button" data-room="Mystery House" aria-label="Mystery House coming soon"></button>
+      <button class="hotspot room-theatre future-link" type="button" data-room="Moonlight Theatre" aria-label="Moonlight Theatre coming soon"></button>
 
       <div class="dynamic-story" id="dynamicStory" aria-live="polite">
-        <span id="storyText">A little witch went to the haunted castle, found a magic book, and suddenly a pumpkin started talking!</span>
+        <span id="storyText">A little witch went to the haunted castle, found a magic book, and then a hidden treasure chest popped open!</span>
       </div>
       <div class="dynamic-count"><strong id="storyCount">0</strong></div>
 
@@ -44,6 +61,14 @@
       <button class="hotspot side-roll side-roll-setting" data-roll="setting" aria-label="Roll place"></button>
       <button class="hotspot side-roll side-roll-problem" data-roll="problem" aria-label="Roll event"></button>
       <button class="hotspot side-roll side-roll-surprise" data-roll="surprise" aria-label="Roll surprise"></button>
+
+      <section class="settings-popover" id="settingsPanel" hidden aria-label="Game settings">
+        <h2>Magic Settings</h2>
+        <button type="button" id="settingsSpeech">Spoken English: On</button>
+        <button type="button" id="settingsMusic">Background magic: Off</button>
+        <button type="button" id="resetProgress">Reset story counter</button>
+        <button type="button" id="closeSettings">Close</button>
+      </section>
     </div>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

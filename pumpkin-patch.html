@@ -14,6 +14,9 @@
       <img class="mockup-bg" src="assets/ChatGPT Image Aug 26, 2026, 01_22_04 AM.png" alt="Pumpkin Patch Adventure game interface">
 
       <a class="hotspot nav-home" href="index.html" aria-label="Back to Castle"></a>
+      <button class="hotspot icon-hot patch-music-hot" id="patchMusic" type="button" aria-pressed="false" aria-label="Toggle magical background music"></button>
+      <button class="hotspot icon-hot patch-sound-hot" id="patchSound" type="button" aria-pressed="true" aria-label="Toggle spoken sound"></button>
+
       <button class="hotspot patch-start" id="startAdventure" aria-label="Start Adventure"></button>
       <button class="hotspot play-again-hot" id="playAgain" aria-label="Play again"></button>
       <a class="hotspot back-castle-hot" href="index.html" aria-label="Back to Castle"></a>
@@ -27,6 +30,11 @@
 
       <div class="patch-count" id="patchCount">0/5</div>
       <div class="patch-score" id="patchScore">0</div>
+      <div class="patch-time" id="patchTime">--:--</div>
+      <div class="patch-stage-chip" id="stageChip">Ready to explore</div>
+
+      <div class="reward-lock success-lock" id="successLock"><strong>Adventure reward</strong><span>Complete all 3 stages to unlock</span></div>
+      <div class="reward-lock treasure-lock" id="treasureLock"><strong>Secret chest</strong><span>Finish the adventure first</span></div>
 
       <div class="patch-message" id="startMessage">
         <h2>Find 5 missing pumpkins!</h2>
@@ -37,24 +45,29 @@
       <div class="patch-clue" id="friendClue">
         <h3 id="friendClueText">Find the friendly ghost.</h3>
         <div class="clue-options">
-          <button data-friend="ghost">Ghost</button>
-          <button data-friend="cat">Black Cat</button>
-          <button data-friend="witch">Witch</button>
+          <button data-friend="ghost"><i class="mini-sprite spr char p1"></i><span>Ghost</span></button>
+          <button data-friend="cat"><i class="mini-sprite spr char p3"></i><span>Black Cat</span></button>
+          <button data-friend="witch"><i class="mini-sprite spr char p0"></i><span>Witch</span></button>
         </div>
       </div>
 
       <div class="patch-message" id="candyGame">
         <h2 id="candyTitle">Put 3 candies in the basket!</h2>
+        <p>Choose the correct number.</p>
         <div class="candy-choice-row" id="candyRow">
-          <button>1</button><button>2</button><button>3</button><button>4</button><button>5</button>
+          <button data-count="1"><i class="mini-candy spr sur p0"></i><span>1</span></button>
+          <button data-count="2"><i class="mini-candy spr sur p0"></i><span>2</span></button>
+          <button data-count="3"><i class="mini-candy spr sur p0"></i><span>3</span></button>
+          <button data-count="4"><i class="mini-candy spr sur p0"></i><span>4</span></button>
+          <button data-count="5"><i class="mini-candy spr sur p0"></i><span>5</span></button>
         </div>
         <button id="checkCandy">Check Basket</button>
       </div>
 
       <div class="patch-message" id="winMessage">
         <h2>You found them all!</h2>
-        <p>Great job! You earned <strong>10 candy stars</strong>.</p>
-        <button id="closeWin">Play Again</button>
+        <p>Great job! The secret treasure chest is now unlocked.</p>
+        <button id="closeWin">Open the treasure!</button>
       </div>
     </div>
   </main>
