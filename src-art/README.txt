@@ -1,0 +1,1 @@
+High-quality central-card sources are intentionally stored as illustrated asset files, not cropped SVG icons.
