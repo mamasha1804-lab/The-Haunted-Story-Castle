@@ -58,11 +58,12 @@
 }
 .label-character{left:22.95%}.label-setting{left:35.20%}.label-problem{left:47.35%}.label-surprise{left:58.88%}
 
-/* Dynamic art now fills the actual picture window more cleanly and no longer looks like a small sticker. */
+/* Dynamic art fills the actual picture window. */
 .card-art{
   border:0;
   border-radius:9px;
   background-color:#291157;
+  background-repeat:no-repeat;
   box-shadow:inset 0 0 0 2px rgba(255,211,100,.34),0 3px 11px rgba(0,0,0,.3);
 }
 .card-art#artCharacter{left:18.10%;top:38.85%;width:9.45%;height:12.35%}
@@ -70,11 +71,66 @@
 .card-art#artProblem{left:42.22%;top:38.85%;width:9.45%;height:12.35%}
 .card-art#artSurprise{left:53.92%;top:38.85%;width:9.45%;height:12.35%}
 
-/* Right-side selection outlines are now confined to the actual cards. */
+/*
+  IMPORTANT: use the richly illustrated mini-cards that already live inside the approved
+  painted mockup instead of the old flat SVG icon sheet. This keeps every random choice in
+  the exact same painterly Halloween style as the rest of the page without loading another
+  art pack.
+*/
+.card-art.char,
+.card-art.loc,
+.card-art.prob,
+.card-art.sur{
+  background-image:url('assets/ChatGPT Image Aug 26, 2026, 01_21_56 AM.png');
+  background-repeat:no-repeat;
+  filter:saturate(1.06) contrast(1.02);
+}
+
+/* Character art: Witch, Ghost, Black Cat, Pumpkin, Vampire */
+.card-art.char{background-size:2896% 1723.81%}
+.card-art.char.p0{background-position:78.5408% 8.2111%}
+.card-art.char.p1{background-position:82.8326% 8.2111%}
+.card-art.char.p2{background-position:87.1245% 8.2111%}
+.card-art.char.p3{background-position:91.4163% 8.2111%}
+.card-art.char.p4{background-position:95.7082% 8.2111%}
+
+/* Locations: Haunted Castle, Spooky Forest, Pumpkin Patch, Old School, Magic Lab */
+.card-art.loc{background-size:2896% 1939.286%}
+.card-art.loc.p0{background-position:78.6838% 33.3981%}
+.card-art.loc.p1{background-position:82.9757% 33.3981%}
+.card-art.loc.p2{background-position:87.2675% 33.3981%}
+.card-art.loc.p3{background-position:91.5594% 33.3981%}
+.card-art.loc.p4{background-position:95.8512% 33.3981%}
+
+/* Story events */
+.card-art.prob{background-size:2784.615% 1939.286%}
+.card-art.prob.p0{background-position:78.5100% 58.8350%}
+.card-art.prob.p1{background-position:83.0946% 58.8350%}
+.card-art.prob.p2{background-position:87.6791% 58.8350%}
+.card-art.prob.p3{background-position:92.2636% 58.8350%}
+.card-art.prob.p4{background-position:96.8481% 58.8350%}
+
+/* Surprises */
+.card-art.sur{background-size:2784.615% 1939.286%}
+.card-art.sur.p0{background-position:78.5100% 84.0777%}
+.card-art.sur.p1{background-position:83.0946% 84.0777%}
+.card-art.sur.p2{background-position:87.6791% 84.0777%}
+.card-art.sur.p3{background-position:92.2636% 84.0777%}
+.card-art.sur.p4{background-position:96.8481% 84.0777%}
+
+/* The default four pictures are already painted into the base mockup; keep them clean. */
+.card-art.is-base{opacity:0}
+
+/* Right-side selection outlines are confined to the actual cards and no longer add a green dot. */
 .side-choice{gap:1.05%}
 .side-choice button{height:94%;align-self:start;border-radius:8px}
-.side-choice button.active{outline-width:2px;box-shadow:0 0 12px rgba(255,179,39,.32)}
-.side-choice button::after{right:4px;top:4px;width:8px;height:8px}
+.side-choice button.active{
+  outline:2px solid rgba(255,215,92,.88);
+  outline-offset:-2px;
+  background:rgba(255,206,71,.025);
+  box-shadow:0 0 10px rgba(255,179,39,.30),inset 0 0 0 1px rgba(255,229,136,.16);
+}
+.side-choice button::after{display:none}
 
 /* Prevent multiple rapid full-story rolls from stacking animations and counters. */
 .mockup-canvas.is-rolling .roll-story,
